@@ -1,4 +1,4 @@
-# YAML is a key-value config format thats separated by colons and indentation
-index:
-    path: /
-    controller: App\Controller\QuestionController::homepage
+# YAML is a key-value config format that's separated by colons and indentation
+# index:
+#     path: /
+#     controller: App\Controller\QuestionController::homepage
