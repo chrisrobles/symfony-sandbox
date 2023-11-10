@@ -15,7 +15,7 @@ class QuestionController extends AbstractController {
     public function homepage(): Response
     {
         //return a Symfony Response object (Symfony\Component\HttpFoundation
-        return new Response("What a bewitching controller we have conjured!");
+        return $this->render('question/homepage.html.twig');
     }
 
     /**
