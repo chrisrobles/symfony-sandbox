@@ -6,10 +6,10 @@ use Symfony\Component\HttpFoundation\Response; //ALL CONTROLLERS MUST RETURN RES
 
 
 class QuestionController extends AbstractController {
-    //The Mismarauder's Tavern
+    //Mismarauder's Tavern
     
     /**
-     * @Route("/")
+     * @Route("/", name="app_cauldron_overflow_homepage")
      * Build the home page
      */
     public function homepage(): Response
@@ -19,7 +19,7 @@ class QuestionController extends AbstractController {
     }
 
     /**
-     * @Route("/questions/{question}")
+     * @Route("/questions/{question}", name="app_cauldron_overflow_question")
      * Build the question page
      */
 
