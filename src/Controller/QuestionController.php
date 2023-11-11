@@ -14,7 +14,13 @@ class QuestionController extends AbstractController {
      */
     public function homepage(): Response
     {
-        //return a Symfony Response object (Symfony\Component\HttpFoundation
+        /*
+        // fun example of using the Twig service directly!
+        $html = $twigEnvironment->render('question/homepage.html.twig');
+        return new Response($html);
+        */
+
+        //return a Symfony Response object (Symfony\Component\HttpFoundation\Response)
         return $this->render('question/homepage.html.twig');
     }
 
