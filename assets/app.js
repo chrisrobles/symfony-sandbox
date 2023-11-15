@@ -9,4 +9,23 @@
 import './styles/app.css';
 
 // start the Stimulus application
-import './bootstrap';
+//import './bootstrap';
+
+// Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
+import $ from 'jquery';
+
+/**
+ * Simple (ugly) code to handle the comment vote up/down
+ */
+var $container = $('.vote-arrows');
+$container.find('a').on('click', function(e) {
+    e.preventDefault();
+    var $link = $(e.currentTarget);
+
+    $.ajax({
+        url: '/comments/10/vote/' + $link.data('direction'),
+        method: 'POST'
+    }).then(function(data) {
+        $container.find('.vote-total').text(data.votes);
+    });
+});
