@@ -3,7 +3,10 @@ namespace App\Controller;
 use Knp\Bundle\MarkdownBundle\MarkdownParserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController; //shortcut methods
 use Symfony\Component\Routing\Annotation\Route; //only thing needed to enable annotation routes
-use Symfony\Component\HttpFoundation\Response; //ALL CONTROLLERS MUST RETURN RESPONSE
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\Cache\CacheInterface;
+
+//ALL CONTROLLERS MUST RETURN RESPONSE
 
 
 class QuestionController extends AbstractController {
@@ -30,12 +33,15 @@ class QuestionController extends AbstractController {
      * Build the question page
      */
 
-    public function show($question, MarkdownParserInterface $markdownParser): Response
+    public function show($question, MarkdownParserInterface $markdownParser, CacheInterface $cache): Response
     {
         $question = ucwords(str_replace('-', ' ', $question)) . '?';
 
         $questionText = 'I\'ve been turned into a cat, any thoughts on how to turn back? While I\'m **adorable**, I don\'t really care for cat food.';
-        $parsedQuestionText = $markdownParser->transformMarkdown($questionText);
+
+        $parsedQuestionText = $cache->get('markdown_'.md5($questionText), function() use ($questionText, $markdownParser) {
+            return $markdownParser->transformMarkdown($questionText);
+        });
 
         $answers = [
             'Make sure your cat is sitting `purrrfectly` still ?',
